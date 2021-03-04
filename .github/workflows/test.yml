@@ -10,15 +10,43 @@ jobs:
   build: # make sure build/ci work properly
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - run: |
-          npm install
-      - run: |
-          npm run all
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: build and run including test
+        run: |
+            npm install
+            npm run all
+
   test: # make sure the action works on a clean machine without building
+    if: ${{ !env.ACT }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: ./
+      - name: Checkout Locally
+        uses: actions/checkout@v2
+      - id: reg
+        uses: ./
         with:
-          milliseconds: 1000
+          scripts_dir: __tests__/etc
+          capture_dir: __tests__/etc/capture
+      - name: get reporter html path
+        run: echo "${{ steps.reg.outputs.report }}"
+      - uses: actions/upload-artifact@v2
+        with:
+          name: report
+          path: ${{ steps.reg.outputs.report }}
+
+  test_local: # make sure the action works on a clean machine without building
+    if: ${{ env.ACT }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Locally
+        uses: actions/checkout@v2
+        with:
+          path: "e2e-reg-action"
+      - id: reg
+        uses: ./
+        with:
+          scripts_dir: e2e-reg-action/__tests__/etc
+          capture_dir: e2e-reg-action/__tests__/etc/capture
+      - name: get reporter html path
+        run: echo "${{ steps.reg.outputs.report }}"

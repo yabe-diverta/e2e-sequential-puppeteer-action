@@ -2,10 +2,17 @@ name: 'Your name here'
 description: 'Provide a description here'
 author: 'Your name or organization here'
 inputs:
-  milliseconds: # change this
+  scripts_dir:
     required: true
-    description: 'input description here'
-    default: 'default value if applicable'
+    description: 'the directory path to reach executable test javascript files'
+    default: './test/e2e'
+  capture_dir:
+    required: true
+    description: 'the directory path screenshots contains'
+    default: './test/e2e/capture'
+outputs:
+  report:
+    description: 'report html file path'
 runs:
   using: 'node12'
   main: 'dist/index.js'
