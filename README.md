@@ -1,20 +1,7 @@
 # running node e2e scripts and comparing diff images by using reg-cli.
 
 ## input/output
-```yaml
-inputs:
-  scripts_dir:
-    required: true
-    description: 'the directory path to reach executable test javascript files'
-    default: './test/e2e'
-  capture_dir:
-    required: true
-    description: 'the directory path screenshots contains'
-    default: './test/e2e/capture'
-outputs:
-  report:
-    description: 'report html file path'
-```
+checkout [action.yml](./action.yml)
 
 ## how to make execuutable javascript e2e testing code
 

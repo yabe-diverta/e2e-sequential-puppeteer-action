@@ -23,9 +23,14 @@ jobs:
     steps:
       - name: Checkout Locally
         uses: actions/checkout@v2
+      # to run your PJ server on the local of GithubAction, you may need to install dependencies in advance.
+      # - name: install dependencies
+      #   run: npm install
       - id: reg
         uses: ./
         with:
+          serve_cmd: npx http-server
+          wait_on: http://localhost:8080
           scripts_dir: __tests__/etc
           capture_dir: __tests__/etc/capture
       - name: get reporter html path
@@ -46,6 +51,8 @@ jobs:
       - id: reg
         uses: ./
         with:
+          serve_cmd: npx http-server
+          wait_on: http://localhost:8080
           scripts_dir: e2e-reg-action/__tests__/etc
           capture_dir: e2e-reg-action/__tests__/etc/capture
       - name: get reporter html path

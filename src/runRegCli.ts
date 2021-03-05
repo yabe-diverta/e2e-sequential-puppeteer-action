@@ -1,18 +1,12 @@
 import childProcess from 'child_process';
 import * as core from '@actions/core';
+import getInfo from './getInfo';
 
-export default async ({
-  captureDir,
-  tmpDir,
-  reportPath
-}: {
-  captureDir: string;
-  tmpDir: string;
-  reportPath: string;
-}) => {
+export default async () => {
+  const {captureDir, tmpDir, reportPath} = await getInfo();
   return new Promise(async (resolve, reject) => {
     const cmd = `npx reg-cli ${captureDir} ${tmpDir} -R ${reportPath}`;
-    core.debug(`executes reg-cli with command: ${cmd}`);
+    core.debug(`executes reg-cli with command: "${cmd}"`);
 
     const process = childProcess.exec(cmd);
     process.on('data', data => resolve(data));

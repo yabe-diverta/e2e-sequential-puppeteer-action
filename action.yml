@@ -2,6 +2,14 @@ name: 'e2e-reg-action'
 description: 'Provide a description here'
 author: 'Your name or organization here'
 inputs:
+  serve_cmd:
+    required: true
+    description: 'serve your application running on local'
+    default: 'npm run serve'
+  wait_on:
+    required: true
+    description: 'an specific resource address for waiting until the server ready'
+    default: 'http://localhost:8080'
   scripts_dir:
     required: true
     description: 'the directory path to reach executable test javascript files'

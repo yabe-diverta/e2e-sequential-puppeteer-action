@@ -1,14 +1,14 @@
-import childProcess from 'child_process';
-import util from 'util';
+import * as exec from '@actions/exec';
+import getInfo from './getInfo';
 
-export default async ({tmpDir, spec}: {tmpDir: string; spec: string}) => {
-  const exec = util.promisify(childProcess.exec);
+export default async (spec: string) => {
+  const {tmpDir} = await getInfo();
 
-  const {stdout, stderr} = await exec(`node ${spec} ${tmpDir} --headless`);
-  if (stdout) {
-    console.log(stdout);
-  }
-  if (stderr) {
-    console.log(stderr);
-  }
+  await exec.exec('node', [spec, tmpDir, '--headless'], {
+    listeners: {
+      stdout: (data: Buffer) => console.log(data.toString()),
+      stderr: (data: Buffer) => console.log(data.toString())
+    },
+    cwd: process.cwd()
+  });
 };

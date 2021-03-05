@@ -1,13 +1,35 @@
 import * as core from '@actions/core';
-import glob from 'glob';
+import * as glob from '@actions/glob';
 import path from 'path';
 import tmp from 'tmp';
 
-export default () => {
-  const scriptsDir: string = core.getInput('scripts_dir');
-  const captureDir: string = core.getInput('capture_dir');
-  const specs = glob.sync(path.join(scriptsDir, '**', '*.test.js'));
-  const tmpDir = tmp.dirSync().name;
-  const reportPath = path.resolve(__dirname, 'report.html');
-  return {captureDir, scriptsDir, specs, tmpDir, reportPath};
-};
+class Info {
+  private static info: {
+    serveCmd: string;
+    waitOn: string;
+    scriptsDir: string;
+    captureDir: string;
+    specs: string[];
+    tmpDir: string;
+    reportPath: string;
+  };
+  static async getInfo() {
+    if (!Info.info) {
+      const scriptsDir = core.getInput('scripts_dir');
+      const g = await glob.create(path.join(scriptsDir, '**', '*.test.js'));
+      const specs = await g.glob();
+
+      Info.info = {
+        serveCmd: core.getInput('serve_cmd'),
+        waitOn: core.getInput('wait_on'),
+        captureDir: core.getInput('capture_dir'),
+        tmpDir: tmp.dirSync().name,
+        reportPath: path.resolve(__dirname, 'report.html'),
+        scriptsDir,
+        specs
+      };
+    }
+    return Info.info;
+  }
+}
+export default async () => await Info.getInfo();

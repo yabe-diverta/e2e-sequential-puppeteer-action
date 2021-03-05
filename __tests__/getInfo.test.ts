@@ -7,7 +7,7 @@ test('getInfo()', async () => {
   process.env['INPUT_SCRIPTS_DIR'] = path.resolve(__dirname, 'etc');
 
   // act
-  const res = getInfo();
+  const res = await getInfo();
 
   // assert
   const hasAllFilesInclueds = [
