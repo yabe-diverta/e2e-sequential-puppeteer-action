@@ -1,4 +1,4 @@
-name: 'e2e-reg-action'
+name: 'e2e-sequential-puppeteer-action'
 description: 'Provide a description here'
 author: 'Your name or organization here'
 inputs:
@@ -14,13 +14,9 @@ inputs:
     required: true
     description: 'the directory path to reach executable test javascript files'
     default: './test/e2e'
-  capture_dir:
-    required: true
-    description: 'the directory path screenshots contains'
-    default: './test/e2e/capture'
 outputs:
-  report:
-    description: 'report html file path'
+  capture_dir:
+    description: 'a dir path stored new capture images'
 runs:
   using: 'node12'
   main: 'dist/index.js'

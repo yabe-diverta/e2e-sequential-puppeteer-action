@@ -26,19 +26,18 @@ jobs:
       # to run your PJ server on the local of GithubAction, you may need to install dependencies in advance.
       # - name: install dependencies
       #   run: npm install
-      - id: reg
+      - id: e2e
         uses: ./
         with:
           serve_cmd: npx http-server
           wait_on: http://localhost:8080
           scripts_dir: __tests__/etc
-          capture_dir: __tests__/etc/capture
-      - name: get reporter html path
-        run: echo "${{ steps.reg.outputs.report }}"
+      - name: reg-cli # 3rd party tool for comparing image diff
+        run: npx reg-cli __tests__/etc/capture ${{ steps.e2e.outputs.capture_dir }} -R report.html
       - uses: actions/upload-artifact@v2
         with:
           name: report
-          path: ${{ steps.reg.outputs.report }}
+          path: report.html
 
   test_local: # make sure the action works on a clean machine without building
     if: ${{ env.ACT }}
@@ -54,6 +53,5 @@ jobs:
           serve_cmd: npx http-server
           wait_on: http://localhost:8080
           scripts_dir: e2e-reg-action/__tests__/etc
-          capture_dir: e2e-reg-action/__tests__/etc/capture
       - name: get reporter html path
-        run: echo "${{ steps.reg.outputs.report }}"
+        run: echo "${{ steps.reg.outputs.capture_dir }}"

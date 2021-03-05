@@ -114,7 +114,6 @@ class Info {
                 Info.info = {
                     serveCmd: core.getInput('serve_cmd'),
                     waitOn: core.getInput('wait_on'),
-                    captureDir: core.getInput('capture_dir'),
                     tmpDir: tmp_1.default.dirSync().name,
                     reportPath: path_1.default.resolve(__dirname, 'report.html'),
                     scriptsDir,
@@ -169,85 +168,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__webpack_require__(2186));
 const getInfo_1 = __importDefault(__webpack_require__(6322));
-const runRegCli_1 = __importDefault(__webpack_require__(6831));
 const runScript_1 = __importDefault(__webpack_require__(1001));
 const Server_1 = __importDefault(__webpack_require__(8539));
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
+        const { specs, reportPath } = yield getInfo_1.default();
         try {
-            const { specs, reportPath } = yield getInfo_1.default();
             const server = new Server_1.default();
             yield server.serve();
             for (const spec of specs) {
                 yield runScript_1.default(spec);
             }
-            yield runRegCli_1.default();
             server.stop();
-            core.setOutput('report', reportPath);
-            process.exit(0);
         }
         catch (error) {
             core.setFailed(error.message);
-            process.exit(1);
         }
+        core.setOutput('report', reportPath);
     });
 }
 run();
-
-
-/***/ }),
-
-/***/ 6831:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const child_process_1 = __importDefault(__webpack_require__(3129));
-const core = __importStar(__webpack_require__(2186));
-const getInfo_1 = __importDefault(__webpack_require__(6322));
-exports.default = () => __awaiter(void 0, void 0, void 0, function* () {
-    const { captureDir, tmpDir, reportPath } = yield getInfo_1.default();
-    return new Promise((resolve, reject) => __awaiter(void 0, void 0, void 0, function* () {
-        const cmd = `npx reg-cli ${captureDir} ${tmpDir} -R ${reportPath}`;
-        core.debug(`executes reg-cli with command: "${cmd}"`);
-        const process = child_process_1.default.exec(cmd);
-        process.on('data', data => resolve(data));
-        process.on('error', err => reject(err));
-        process.on('close', err => (err !== 0 ? reject(err) : resolve(err)));
-    }));
-});
 
 
 /***/ }),

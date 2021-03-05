@@ -8,7 +8,6 @@ class Info {
     serveCmd: string;
     waitOn: string;
     scriptsDir: string;
-    captureDir: string;
     specs: string[];
     tmpDir: string;
     reportPath: string;
@@ -22,7 +21,6 @@ class Info {
       Info.info = {
         serveCmd: core.getInput('serve_cmd'),
         waitOn: core.getInput('wait_on'),
-        captureDir: core.getInput('capture_dir'),
         tmpDir: tmp.dirSync().name,
         reportPath: path.resolve(__dirname, 'report.html'),
         scriptsDir,

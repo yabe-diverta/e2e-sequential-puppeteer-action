@@ -1,4 +1,4 @@
-# running node e2e scripts and comparing diff images by using reg-cli.
+# running node e2e scripts sequentially.
 
 ## input/output
 checkout [action.yml](./action.yml)
@@ -26,5 +26,5 @@ ls test/e2e/capture
 // ...
 ```
 
-run this action with parameters `scripts_dir` and `capture_dir`.  
+finally, run this action with parameters.  
 please checkout [test.yml](./.github/workflows/test.yml)

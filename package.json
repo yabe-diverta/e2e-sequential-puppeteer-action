@@ -1,5 +1,5 @@
 {
-  "name": "reg-e2e-action",
+  "name": "e2e-sequential-puppeteer-action",
   "version": "1.0.1",
   "private": true,
   "description": "running e2e action with reg-cli",
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yabe-diverta/e2e-reg-action.git"
+    "url": "git+https://github.com/yabe-diverta/e2e-sequential-puppeteer-action.git"
   },
   "keywords": [
     "actions",
