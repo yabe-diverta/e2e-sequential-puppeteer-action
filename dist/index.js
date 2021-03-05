@@ -185,6 +185,7 @@ function run() {
             core.setFailed(error.message);
         }
         core.setOutput('report', reportPath);
+        process.exit(0);
     });
 }
 run();

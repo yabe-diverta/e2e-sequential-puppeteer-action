@@ -18,6 +18,7 @@ async function run(): Promise<void> {
   }
 
   core.setOutput('report', reportPath);
+  process.exit(0);
 }
 
 run();
