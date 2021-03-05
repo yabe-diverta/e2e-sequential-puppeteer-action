@@ -172,7 +172,7 @@ const runScript_1 = __importDefault(__webpack_require__(1001));
 const Server_1 = __importDefault(__webpack_require__(8539));
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
-        const { specs, reportPath } = yield getInfo_1.default();
+        const { specs, tmpDir } = yield getInfo_1.default();
         try {
             const server = new Server_1.default();
             yield server.serve();
@@ -184,7 +184,7 @@ function run() {
         catch (error) {
             core.setFailed(error.message);
         }
-        core.setOutput('report', reportPath);
+        core.setOutput('capture_dir', tmpDir);
         process.exit(0);
     });
 }
