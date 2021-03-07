@@ -4,7 +4,7 @@ import runSpec from './runScript';
 import Server from './Server';
 
 async function run(): Promise<void> {
-  const {specs, tmpDir} = await getInfo();
+  const {specs, newCaptureDir} = await getInfo();
 
   try {
     const server = new Server();
@@ -17,7 +17,7 @@ async function run(): Promise<void> {
     core.setFailed(error.message);
   }
 
-  core.setOutput('capture_dir', tmpDir);
+  core.setOutput('capture_dir', newCaptureDir);
   process.exit(0);
 }
 

@@ -1,7 +1,7 @@
 import * as core from '@actions/core';
 import * as glob from '@actions/glob';
 import path from 'path';
-import tmp from 'tmp';
+import mkdirp from 'mkdirp';
 
 class Info {
   private static info: {
@@ -9,7 +9,7 @@ class Info {
     waitOn: string;
     scriptsDir: string;
     specs: string[];
-    tmpDir: string;
+    newCaptureDir: string;
     reportPath: string;
   };
   static async getInfo() {
@@ -17,11 +17,13 @@ class Info {
       const scriptsDir = core.getInput('scripts_dir');
       const g = await glob.create(path.join(scriptsDir, '**', '*.test.js'));
       const specs = await g.glob();
+      const tmpDir = path.resolve(__dirname, `newcapture_${Date.now()}`);
+      await mkdirp(tmpDir);
 
       Info.info = {
         serveCmd: core.getInput('serve_cmd'),
         waitOn: core.getInput('wait_on'),
-        tmpDir: tmp.dirSync().name,
+        newCaptureDir: tmpDir,
         reportPath: path.resolve(__dirname, 'report.html'),
         scriptsDir,
         specs
