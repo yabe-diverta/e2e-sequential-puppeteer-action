@@ -111,13 +111,12 @@ class Info {
                 const scriptsDir = core.getInput('scripts_dir');
                 const g = yield glob.create(path_1.default.join(scriptsDir, '**', '*.test.js'));
                 const specs = yield g.glob();
-                const tmpDir = path_1.default.resolve(__dirname, `newcapture_${Date.now()}`);
-                yield mkdirp_1.default(tmpDir);
+                const newCaptureDir = path_1.default.resolve(scriptsDir, `newcapture_${Date.now()}`);
+                yield mkdirp_1.default(newCaptureDir);
                 Info.info = {
                     serveCmd: core.getInput('serve_cmd'),
                     waitOn: core.getInput('wait_on'),
-                    newCaptureDir: tmpDir,
-                    reportPath: path_1.default.resolve(__dirname, 'report.html'),
+                    newCaptureDir,
                     scriptsDir,
                     specs
                 };
