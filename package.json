@@ -34,7 +34,7 @@
     "wait-on": "^5.2.1"
   },
   "devDependencies": {
-    "@types/jest": "^26.0.15",
+    "@types/jest": "^26.0.21",
     "@types/mkdirp": "^1.0.1",
     "@types/node": "^14.14.35",
     "@types/wait-on": "^5.2.0",
