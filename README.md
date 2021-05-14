@@ -6,8 +6,7 @@ checkout [action.yml](./action.yml)
 ## how to make execuutable javascript e2e testing code
 
 please use [katalon recorder](https://chrome.google.com/webstore/detail/katalon-recorder-selenium/ljdobmomdgdljniojadhoplhkpialdid) and [katalon2puppeteer](https://www.npmjs.com/package/katalon2puppeteer).  
-store codes with `*.test.js` naming,  
-modify generated codes.
+store codes as `${scripts_dir}/${test_name(freely named as you want)}/index.js`.
 
 execute scripts in your local to make reference images,  
 you need to store images in a specific directory in your PJ.
@@ -15,15 +14,14 @@ you need to store images in a specific directory in your PJ.
 example:
 
 ```sh
-ls test/e2e | grep .test.js
-// login.e2e.test.js
-// nologin.e2e.test.js
+echo ${SCRIPTS_DIR} # is reqrequired option inherited from GithubAction.
 
-ls test/e2e/capture
-// login.json_000_command%3Dopen%2Ctarget%3Dhttp%3A%2F%2Flocalhost%3A8080%2Fmypage%2Fmail%2F%2Cvalue%3D.png
-// login.json_002_command%3Dclick%2Ctarget%3Dlink%3D%E3%83%97%E3%83%AD%E3%83%95%E3%82%A3%E3%83%BC%E3%83%AB%2Cvalue%3D.png
-// login.json_003_command%3Dclick%2Ctarget%3Dlink%3D%E5%A4%89%E6%9B%B4%E3%81%99%E3%82%8B%2Cvalue%3D.png
-// ...
+ls ${SCRIPTS_DIR}/*/index.js
+// ${SCRIPTS_DIR}/login_test/index.js
+// ${SCRIPTS_DIR}/nologin_test/index.js
+
+ls ${SCRIPTS_DIR}/capture
+// ... # please store many captures taken by login_test/index.js and nologin_test/index.js in advance by your local execution.
 ```
 
 finally, run this action with parameters.  
