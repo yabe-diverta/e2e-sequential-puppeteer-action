@@ -11,9 +11,9 @@ test('getInfo()', async () => {
 
   // assert
   const hasAllFilesInclueds = [
-    'test1.test.js',
-    'test2.test.js',
-    'test3.test.js'
+    'test1/index.js',
+    'test2/index.js',
+    'test3/index.js'
   ].every(filename => res.specs.some(p => p.includes(filename)));
   expect(hasAllFilesInclueds).toBeTruthy();
 });

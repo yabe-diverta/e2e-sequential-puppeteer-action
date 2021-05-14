@@ -1,10 +1,15 @@
 import * as exec from '@actions/exec';
 import getInfo from './getInfo';
 
-export default async (spec: string) => {
-  const {newCaptureDir} = await getInfo();
+export default async () => {
+  const {specs} = await getInfo();
+  for (const spec of specs) {
+    await runScript(spec);
+  }
+};
 
-  await exec.exec('node', [spec, newCaptureDir, '--headless'], {
+export const runScript = async (spec: string) => {
+  await exec.exec('node', [spec, '--newcapture', '--headless'], {
     listeners: {
       stdout: (data: Buffer) => console.log(data.toString()),
       stderr: (data: Buffer) => console.log(data.toString())

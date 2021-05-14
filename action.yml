@@ -14,9 +14,6 @@ inputs:
     required: true
     description: 'the directory path to reach executable test javascript files'
     default: './test/e2e'
-outputs:
-  capture_dir:
-    description: 'a dir path stored new capture images'
 runs:
   using: 'node12'
   main: 'dist/index.js'

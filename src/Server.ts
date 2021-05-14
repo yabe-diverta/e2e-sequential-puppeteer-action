@@ -33,8 +33,8 @@ export default class Server {
     });
   }
 
-  stop() {
+  async stop() {
     console.log('stop the server.');
-    this.server.kill();
+    await new Promise(res => res(this.server.kill()));
   }
 }
