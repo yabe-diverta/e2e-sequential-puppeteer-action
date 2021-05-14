@@ -46,12 +46,12 @@ jobs:
       - name: Checkout Locally
         uses: actions/checkout@v2
         with:
-          path: "e2e-reg-action"
+          path: "e2e-sequential-puppeteer-action"
       - id: reg
         uses: ./
         with:
           serve_cmd: npx http-server
           wait_on: http://localhost:8080
-          scripts_dir: e2e-reg-action/__tests__/etc
+          scripts_dir: e2e-sequential-puppeteer-action/__tests__/etc
       - name: get reporter html path
         run: echo "${{ steps.reg.outputs.capture_dir }}"
