@@ -11,7 +11,8 @@
     "lint": "eslint src/**/*.ts",
     "package": "ncc build --source-map --license licenses.txt",
     "test": "jest",
-    "all": "npm run build && npm run format && npm run lint && npm run package && npm test"
+    "all": "npm run build && npm run format && npm run lint && npm run package && npm test",
+    "postinstall": "enforcing-convensional-commit"
   },
   "repository": {
     "type": "git",
@@ -38,6 +39,7 @@
     "@types/wait-on": "^5.2.0",
     "@typescript-eslint/parser": "^4.17.0",
     "@vercel/ncc": "^0.25.1",
+    "enforcing-convensional-commit": "^1.0.10",
     "eslint": "^7.21.0",
     "eslint-plugin-github": "^4.1.1",
     "eslint-plugin-jest": "^24.2.0",
