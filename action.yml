@@ -3,12 +3,12 @@ description: 'Provide a description here'
 author: 'Your name or organization here'
 inputs:
   serve_cmd:
-    required: true
+    required: false
     description: 'serve your application running on local'
-    default: 'npm run serve'
+    default: 'echo "no serve command is provided."'
   wait_on:
     required: true
-    description: 'an specific resource address for waiting until the server ready'
+    description: 'an specific URL for waiting until the web server ready'
     default: 'http://localhost:8080'
   scripts_dir:
     required: true
