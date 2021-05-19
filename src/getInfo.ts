@@ -8,18 +8,21 @@ class Info {
     waitOn: string;
     scriptsDir: string;
     specs: string[];
+    updateCaptures: boolean;
   };
   static async getInfo() {
     if (!Info.info) {
       const scriptsDir = core.getInput('scripts_dir');
       const g = await glob.create(path.join(scriptsDir, '*', 'index.js'));
       const specs = await g.glob();
+      const updateCaptures = Boolean(core.getInput('update_captures'));
 
       Info.info = {
         serveCmd: core.getInput('serve_cmd'),
         waitOn: core.getInput('wait_on'),
         scriptsDir,
-        specs
+        specs,
+        updateCaptures
       };
     }
     return Info.info;
