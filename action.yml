@@ -7,9 +7,12 @@ inputs:
     description: 'serve your application running on local'
     default: 'echo "no serve command is provided."'
   update_captures:
-    required: true
+    required: false
     description: 'whether you want to capture new screen capchers or just update current screen capchers'
     default: 'false'
+  basic_auth:
+    required: false
+    description: 'basic auth info, username:password'
   wait_on:
     required: true
     description: 'an specific URL for waiting until the web server ready'

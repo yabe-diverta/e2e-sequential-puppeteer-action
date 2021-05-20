@@ -57,6 +57,13 @@ apply below lines into your github actions def yaml.
 ## for dev
 
 ### release
+- git commit
+  - git add . && git commit && git push
 - update version in package.json
-- attach new tag as vx.x.x
-- release in github release page
+  - npm version patch
+- attach new tag as vN && vN.N.N
+  - git tag vN -f
+  - git tag vN.N.N
+  - git push origin vN -f
+  - git push origin vN.N.N
+- release in [github release page](https://github.com/yabe-diverta/e2e-sequential-puppeteer-action/releases)

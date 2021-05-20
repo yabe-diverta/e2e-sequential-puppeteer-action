@@ -2,10 +2,18 @@ import * as exec from '@actions/exec';
 import getInfo from './getInfo';
 
 export default async () => {
-  const {specs, updateCaptures} = await getInfo();
-  const options = updateCaptures
-    ? ['--headless']
-    : ['--newcapture', '--headless'];
+  const {specs, updateCaptures, basicAuth} = await getInfo();
+  let options: string[] = ['--headless'];
+  if (updateCaptures) {
+    options = [...options, '--newcapture'];
+  }
+  if (
+    basicAuth &&
+    basicAuth.includes(':') &&
+    basicAuth.split(':').every(v => v !== '')
+  ) {
+    options = [...options, `--basicAuth=${basicAuth}`];
+  }
 
   for (const spec of specs) {
     await runScript(spec, options);

@@ -113,12 +113,14 @@ class Info {
                 const g = yield glob.create(path_1.default.join(scriptsDir, '*', 'index.js'));
                 const specs = yield g.glob();
                 const updateCaptures = Boolean(core.getInput('update_captures'));
+                const basicAuth = core.getInput('basic_auth');
                 Info.info = {
                     serveCmd: core.getInput('serve_cmd'),
                     waitOn: core.getInput('wait_on'),
                     scriptsDir,
                     specs,
-                    updateCaptures
+                    updateCaptures,
+                    basicAuth
                 };
             }
             return Info.info;
@@ -230,10 +232,16 @@ exports.runScript = void 0;
 const exec = __importStar(__webpack_require__(1514));
 const getInfo_1 = __importDefault(__webpack_require__(6322));
 exports.default = () => __awaiter(void 0, void 0, void 0, function* () {
-    const { specs, updateCaptures } = yield getInfo_1.default();
-    const options = updateCaptures
-        ? ['--headless']
-        : ['--newcapture', '--headless'];
+    const { specs, updateCaptures, basicAuth } = yield getInfo_1.default();
+    let options = ['--headless'];
+    if (updateCaptures) {
+        options = [...options, '--newcapture'];
+    }
+    if (basicAuth &&
+        basicAuth.includes(':') &&
+        basicAuth.split(':').every(v => v !== '')) {
+        options = [...options, `--basicAuth=${basicAuth}`];
+    }
     for (const spec of specs) {
         yield exports.runScript(spec, options);
     }
