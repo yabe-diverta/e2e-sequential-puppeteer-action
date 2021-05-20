@@ -39,7 +39,7 @@
     "@types/wait-on": "^5.2.0",
     "@typescript-eslint/parser": "^4.19.0",
     "@vercel/ncc": "^0.25.1",
-    "enforcing-convensional-commit": "^1.0.10",
+    "enforcing-convensional-commit": "^1.0.19",
     "eslint": "^7.21.0",
     "eslint-plugin-github": "^4.1.1",
     "eslint-plugin-jest": "^24.3.2",
