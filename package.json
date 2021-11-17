@@ -38,7 +38,7 @@
     "@types/node": "^14.14.35",
     "@types/wait-on": "^5.2.0",
     "@typescript-eslint/parser": "^4.19.0",
-    "@vercel/ncc": "^0.25.1",
+    "@vercel/ncc": "^0.32.0",
     "enforcing-convensional-commit": "^1.0.10",
     "eslint": "^7.21.0",
     "eslint-plugin-github": "^4.1.1",
