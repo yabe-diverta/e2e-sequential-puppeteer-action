@@ -26,6 +26,9 @@ export default class Server {
       interval: 100, // poll interval in ms, default 250ms
       timeout: 300000, // timeout in ms, default Infinity
       tcpTimeout: 1000, // tcp timeout in ms, default 300ms
+      headers: {
+        'user-agent': 'e2e-sequential-puppeteer-action'
+      },
       validateStatus: status => {
         console.log(`status: ${status}`);
         return /^20.|^401/.test(`${status}`);
