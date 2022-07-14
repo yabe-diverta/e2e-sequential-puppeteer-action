@@ -46,6 +46,9 @@ class Server {
                 interval: 100,
                 timeout: 300000,
                 tcpTimeout: 1000,
+                headers: {
+                    'user-agent': 'e2e-sequential-puppeteer-action'
+                },
                 validateStatus: status => {
                     console.log(`status: ${status}`);
                     return /^20.|^401/.test(`${status}`);
