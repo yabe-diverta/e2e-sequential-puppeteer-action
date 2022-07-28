@@ -237,7 +237,7 @@ const getInfo_1 = __importDefault(__webpack_require__(6322));
 exports.default = () => __awaiter(void 0, void 0, void 0, function* () {
     const { specs, updateCaptures, basicAuth } = yield getInfo_1.default();
     let options = ['--headless'];
-    if (updateCaptures) {
+    if (!updateCaptures) {
         options = [...options, '--newcapture'];
     }
     if (basicAuth &&
