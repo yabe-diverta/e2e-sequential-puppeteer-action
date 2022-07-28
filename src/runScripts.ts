@@ -4,7 +4,7 @@ import getInfo from './getInfo';
 export default async () => {
   const {specs, updateCaptures, basicAuth} = await getInfo();
   let options: string[] = ['--headless'];
-  if (updateCaptures) {
+  if (!updateCaptures) {
     options = [...options, '--newcapture'];
   }
   if (
