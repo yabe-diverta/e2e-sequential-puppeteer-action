@@ -16,7 +16,7 @@ class Info {
       const scriptsDir = core.getInput('scripts_dir');
       const g = await glob.create(path.join(scriptsDir, '*', 'index.js'));
       const specs = await g.glob();
-      const updateCaptures = Boolean(core.getInput('update_captures'));
+      const updateCaptures = core.getInput('update_captures') === 'true';
       const basicAuth = core.getInput('basic_auth');
 
       Info.info = {

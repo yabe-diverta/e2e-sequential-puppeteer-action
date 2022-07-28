@@ -115,7 +115,7 @@ class Info {
                 const scriptsDir = core.getInput('scripts_dir');
                 const g = yield glob.create(path_1.default.join(scriptsDir, '*', 'index.js'));
                 const specs = yield g.glob();
-                const updateCaptures = Boolean(core.getInput('update_captures'));
+                const updateCaptures = core.getInput('update_captures') === 'true';
                 const basicAuth = core.getInput('basic_auth');
                 Info.info = {
                     serveCmd: core.getInput('serve_cmd'),
