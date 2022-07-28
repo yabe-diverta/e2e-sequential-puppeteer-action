@@ -1,6 +1,6 @@
 {
   "name": "e2e-sequential-puppeteer-action",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "private": true,
   "description": "running e2e action with reg-cli",
   "main": "lib/main.js",
